@@ -1,25 +1,26 @@
 #!/bin/bash
 
-LOGFILE="/var/log/sysinfo"
+logfile="/var/log/sysinfo"
 
-echo "------ $(date) ------" >> $LOGFILE
+echo "----------------------------" >> $logfile
+echo "Date & Time: $(date)" >> $logfile
 
-echo "Uptime, logged-in users, CPU load:" >> $LOGFILE
-w >> $LOGFILE
+echo "System uptime and users:" >> $logfile
+w >> $logfile 2>&1
 
-echo "Memory usage:" >> $LOGFILE
-free -m >> $LOGFILE
+echo "Memory usage:" >> $logfile
+free -m >> $logfile 2>&1
 
-echo "Disk usage:" >> $LOGFILE
-df -h >> $LOGFILE
+echo "Disk usage:" >> $logfile
+df -h >> $logfile 2>&1
 
-echo "Open TCP ports:" >> $LOGFILE
-ss -tulpn >> $LOGFILE
+echo "Open TCP/UDP ports:" >> $logfile
+ss -tulpn >> $logfile 2>&1
 
-echo "Ping ukr.net:" >> $LOGFILE
-ping -c1 -w1 ukr.net >> $LOGFILE 2>&1
+echo "Ping ukr.net:" >> $logfile
+ping -c1 -w1 ukr.net >> $logfile 2>&1
 
-echo "SUID programs:" >> $LOGFILE
-find / -type f -perm -4000 2>/dev/null >> $LOGFILE
+echo "SUID programs:" >> $logfile
+find / -perm -4000 2>/dev/null >> $logfile
 
-echo "----------------------------" >> $LOGFILE
+echo "----------------------------" >> $logfile

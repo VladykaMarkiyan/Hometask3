@@ -6,3 +6,4 @@ aws ec2 run-instances \
 --instance-type t3.micro \
 --key-name my-key \
 --security-groups my-ssh-sg \
+--iam-instance-profile Name="readonly"
